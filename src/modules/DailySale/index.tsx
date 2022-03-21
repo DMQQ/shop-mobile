@@ -1,96 +1,109 @@
 import React from "react";
-import { View, Text, Image, useWindowDimensions } from "react-native";
+import { View, Text, Image } from "react-native";
 import { SharedElement } from "react-navigation-shared-element";
-import useFetch from "../../utils/hooks/useFetch";
 import { ProductTypeProps } from "../Product";
-import dailyStyle from "./styles";
+import styles from "./styles";
 import { API } from "../../constants/routes";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { useNavigationProps } from "../../@types/types";
-import AddToCart from "../AddToCart/AddToCart";
-import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
-import { SkeletonPlaceholder } from "../../components";
-import { notUndefined } from "../../functions/typecheckers";
-import EmptyList from "modules/ProductsCarusel/Info";
+import { Button } from "../../components";
+import Clock from "components/Clock";
+import useCart from "modules/AddToCart/useCart";
+import Ripple from "react-native-material-ripple";
+import { gql, useQuery } from "@apollo/client";
+import { useUser } from "utils/context/UserContext";
+import Loader from "./Loader";
 
-interface DailySaleProps {}
+const GET_DAILY = gql`
+  query {
+    sale {
+      prod_id
+      title
+      price
+      img_id {
+        name
+      }
+    }
+  }
+`;
 
-export default function DailySale({}: DailySaleProps) {
-  const { data, loading, error } = useFetch<ProductTypeProps>(
-    "/sales/daily",
-    [],
-    {}
-  );
+export default function DailySale() {
+  const { user } = useUser();
+
+  const { data = {} as ProductTypeProps, loading } = useQuery(GET_DAILY, {
+    context: {
+      headers: {
+        token: user.token,
+      },
+    },
+  });
+
+  console.log(data);
 
   const navigation = useNavigation<useNavigationProps>();
 
   function toProduct() {
-    if (data.prod_id) {
+    if (data?.sale?.prod_id) {
       navigation.navigate("Details", {
-        image: `${API}/upload/images=${data?.img_id[0]?.name}`,
-        prod_id: data.prod_id,
+        image: `${API}/upload/images=${data?.sale?.img_id[0]?.name}`,
+        prod_id: data?.sale?.prod_id,
         sharedID: "DAILY",
-        title: data.title,
+        title: data?.sale?.title,
       });
     }
   }
 
-  const { width } = useWindowDimensions();
+  const { pushToCart, result } = useCart(data?.sale?.prod_id);
 
   return (
-    <View style={[dailyStyle.container]}>
-      <Text style={[dailyStyle.title]}>Daily Sale</Text>
-
-      {typeof data.prod_id !== "undefined" && (
-        <View style={[{ alignItems: "center", position: "relative" }]}>
-          <TouchableOpacity activeOpacity={0.9} onPress={toProduct}>
-            <SharedElement id={`prod_id.${data?.prod_id}DAILY`}>
+    <View style={styles.container}>
+      {!loading && data.sale && (
+        <>
+          <View style={[styles.row, { justifyContent: "space-between" }]}>
+            <Text style={styles.title}>Promotion</Text>
+            <Clock />
+          </View>
+          <Ripple onPress={toProduct}>
+            <SharedElement
+              id={`prod_id.${data?.sale?.prod_id}DAILY`}
+              style={styles.image_container}
+            >
               <Image
-                style={[dailyStyle.image]}
+                style={[styles.image]}
                 resizeMode="cover"
                 source={{
-                  uri: `${API}/upload/images=${data?.img_id[0]?.name}`,
+                  uri: `${API}/upload/images=${data?.sale?.img_id?.[0]?.name}`,
                 }}
               />
             </SharedElement>
-          </TouchableOpacity>
-
-          <Animated.View
-            style={[dailyStyle.buttonsContainer]}
-            entering={FadeIn.delay(500).duration(100)}
-            exiting={FadeOut}
-          >
-            <Text style={[dailyStyle.price]}>${data?.price}</Text>
-            <AddToCart
-              iconStyle={{ color: "#000" }}
-              prod_id={data.prod_id}
-              relative
-              text="Add"
-              fontStyle={{ color: "#000" }}
-              style={[dailyStyle.button, { backgroundColor: "#fff" }]}
-            />
-          </Animated.View>
-        </View>
-      )}
-
-      {!!error && <EmptyList variant="error" error={error} />}
-
-      {loading && !notUndefined(data.prod_id) && (
-        <SkeletonPlaceholder
-          backgroundColor={"#1f2b3d"}
-          highlightColor={"#2a3a52"}
-          size={{ width, height: 300 }}
-        >
-          <View style={{ width, height: 300, alignItems: "center" }}>
-            <SkeletonPlaceholder.Item
-              height={250}
-              width={width - 20}
-              margin={0}
-            />
+          </Ripple>
+          <View style={[styles.details]}>
+            <Text style={{ color: "#fff", fontSize: 20, marginBottom: 5 }}>
+              {data?.sale?.title}
+            </Text>
+            <View
+              style={[
+                styles.row,
+                { width: "100%", justifyContent: "space-between" },
+              ]}
+            >
+              <View style={styles.row}>
+                <Text style={styles.price}>${data?.sale?.price}</Text>
+                <Text style={styles.discounted}>
+                  ${Math.ceil(data?.sale?.price * 1.25)}
+                </Text>
+              </View>
+              <Button
+                onPress={() => pushToCart()}
+                text={!!result ? "Added" : "Add to cart"}
+                variant="ternary"
+              />
+            </View>
           </View>
-        </SkeletonPlaceholder>
+        </>
       )}
+
+      {loading && !data.sale && <Loader />}
     </View>
   );
 }

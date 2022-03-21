@@ -3,41 +3,59 @@ import { Colors } from "../../constants/styles";
 
 const { width: WIDTH } = Dimensions.get("window");
 
-const dailyStyle = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-    width: WIDTH,
-    minHeight: 375,
+    flex: 1,
+    marginTop: 10,
+    marginBottom: 10,
+    position: "relative",
+  },
+  row: {
+    flexDirection: "row",
+    padding: 5,
+    alignItems: "center",
   },
   title: {
-    fontFamily: "PoppinsBold",
     fontSize: 30,
-    color: Colors.text,
+    color: "#fff",
+    fontFamily: "PoppinsBold",
+  },
+  image_container: {
+    width: WIDTH,
     padding: 10,
   },
   image: {
-    width: WIDTH - 20,
-    height: 250,
-  },
-  button: {
-    width: 130,
-    flexDirection: "row-reverse",
-  },
-  buttonsContainer: {
-    position: "absolute",
-    width: WIDTH - 40,
+    height: 240,
     padding: 10,
     borderRadius: 5,
+  },
+  saved: {
+    position: "absolute",
+    top: -10,
+    left: 10,
     backgroundColor: Colors.primary100,
-    flexDirection: "row",
-    bottom: -40,
-    justifyContent: "space-around",
+    color: "#fff",
+    fontSize: 25,
+    zIndex: 20,
+    padding: 5,
+  },
+  details: {
+    padding: 10,
     alignItems: "center",
+    justifyContent: "space-between",
   },
   price: {
     color: "#fff",
     fontSize: 30,
-    fontFamily: "PoppinsBold",
+    fontWeight: "bold",
+    marginRight: 5,
+  },
+  button: {},
+  discounted: {
+    color: "rgba(255,255,255,0.8)",
+    fontSize: 18,
+    textDecorationLine: "line-through",
   },
 });
 
-export default dailyStyle;
+export default styles;

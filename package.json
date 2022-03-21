@@ -9,7 +9,7 @@
     "test": "jest --watch "
   },
   "dependencies": {
-    "@apollo/client": "^3.5.10",
+    "@apollo/client": "3.4.16",
     "@babel/preset-typescript": "^7.16.7",
     "@expo/vector-icons": "^12.0.0",
     "@gorhom/bottom-sheet": "^4",
@@ -31,7 +31,7 @@
     "expo-splash-screen": "~0.14.1",
     "expo-status-bar": "~1.2.0",
     "formik": "^2.2.9",
-    "graphql": "^16.3.0",
+    "graphql": "15.7.2",
     "jest-native": "^3.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
