@@ -6,7 +6,7 @@ const GET_AUCTIONS = gql`
     auctions(take: 5) {
       auction_id
       product {
-        img_id(take: 1) {
+        images(take: 1) {
           name
         }
       }

@@ -32,7 +32,7 @@ export default function Tile({ setSelectedTile, product }: TileProps) {
       }}
     >
       <Image
-        source={image(product.img_id)}
+        source={image(product.images)}
         style={{ width: tileWidth, height: tileWidth }}
         resizeMode="cover"
       />

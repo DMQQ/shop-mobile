@@ -7,7 +7,7 @@ export interface Sale {
   price: number;
   quantity: number;
   title: string;
-  img_id: ProductImageProps[];
+  images: ProductImageProps[];
   rating: number;
   reviewsCount: number;
 }
@@ -22,7 +22,7 @@ export const GET_SALE = gql`
       rating
       reviewsCount
 
-      img_id {
+      images {
         name
         id
       }

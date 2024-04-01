@@ -11,7 +11,7 @@ export default function Preview({ product }: PreviewProps) {
   return (
     <View style={styles.preview_container}>
       <Image
-        source={image(product?.img_id)}
+        source={image(product?.images)}
         style={styles.image}
         resizeMode="contain"
       />

@@ -13,23 +13,23 @@ export const GET_PRODUCT = gql`
 
       rating
 
-      img_id(take: 10, skip: 0) {
+      images(take: 10, skip: 0) {
         id
         name
       }
 
-      rating_id(take: 3) {
+      ratings(take: 3) {
         title
-        rating_id
-        description
         rating
+        description
+        rating_id
       }
     }
     suggestions(name: $name) {
       prod_id
       title
       price
-      img_id(take: 1) {
+      images(take: 1) {
         name
       }
     }
@@ -42,7 +42,7 @@ export const GET_SUGGESTIONS = gql`
       prod_id
       title
       price
-      img_id(take: 1) {
+      images(take: 1) {
         name
       }
     }

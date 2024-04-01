@@ -18,7 +18,7 @@ export default function AuctionsNavigator() {
   const renderItem = useCallback(
     ({ item, index }: any) => (
       <Auction
-        images={item.product.img_id}
+        images={item.product.images}
         isLast={index === data?.auction?.length}
         {...item}
       />

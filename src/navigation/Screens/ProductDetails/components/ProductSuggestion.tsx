@@ -22,7 +22,7 @@ export default function ProductSuggestion({
 
   function navigateProduct(item: ProductMinified) {
     navigation.push("Product", {
-      image: image(item.img_id).uri,
+      image: image(item.images).uri,
       title: item.title,
       prod_id: item.prod_id,
       sharedID: "Details",
@@ -67,7 +67,7 @@ export default function ProductSuggestion({
                 borderRadius: 7.5,
               }}
               resizeMode="contain"
-              source={image(item.img_id)}
+              source={image(item.images)}
             />
           </Ripple>
         )}

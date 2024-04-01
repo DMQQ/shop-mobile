@@ -111,7 +111,7 @@ export default function ProductsList({
               flexGrow: 0,
             }}
             horizontal
-            data={selectedProduct?.img_id || []}
+            data={selectedProduct?.images || []}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item, index }) => (
               <Image

@@ -32,9 +32,9 @@ export default function ProductDetails({
   const product = data?.product;
 
   const images = (() => {
-    if (typeof image === "undefined") return product?.img_id || [];
+    if (typeof image === "undefined") return product?.images || [];
 
-    const fetchedImages = [...(product?.img_id || [])].splice(1);
+    const fetchedImages = [...(product?.images || [])].splice(1);
 
     return [{ id: 0, name: image?.split("=")[1] }, ...fetchedImages];
   })();
@@ -144,7 +144,7 @@ export default function ProductDetails({
       <CartSheet
         cartProduct={cartProduct}
         onDismiss={() => sheetRef.current?.close()}
-        product={{ ...(product as Product), img_id: images }}
+        product={{ ...(product as Product), images: images }}
         ref={(ref) => (sheetRef.current = ref)}
       />
 

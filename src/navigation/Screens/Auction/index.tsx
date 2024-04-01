@@ -49,7 +49,7 @@ export default function AuctionScreen({
       ) : (
         <>
           <ImagesCarusel
-            images={data?.auction?.product?.img_id! || []}
+            images={data?.auction?.product?.images! || []}
             sharedID="Auction"
             prod_id={data?.auction?.product?.prod_id || 0}
           />
@@ -76,7 +76,7 @@ export default function AuctionScreen({
 
           <Details
             showPrice={false}
-            image={`${API}/upload/image=${data?.auction?.product?.img_id[0]?.name}`}
+            image={`${API}/upload/image=${data?.auction?.product?.images[0]?.name}`}
             {...(data?.auction?.product as any)}
           />
         </>

@@ -11,7 +11,7 @@ const GET_AUCTIONS = gql`
       product {
         title
         category
-        img_id(take: 1) {
+        images(take: 1) {
           name
         }
       }

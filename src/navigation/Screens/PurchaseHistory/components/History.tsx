@@ -37,7 +37,7 @@ export default function History({ products, date, total_price }: IHistory) {
 
   function onPushRoute(product: Product) {
     navigation.push("Product", {
-      image: `${API}/upload/images=${product.img_id[0].name}`,
+      image: `${API}/upload/images=${product.images[0].name}`,
       prod_id: product.prod_id,
       sharedID: "",
       title: product.title,
@@ -67,7 +67,7 @@ export default function History({ products, date, total_price }: IHistory) {
               }}
             >
               <Image
-                source={image(product.img_id[0].name)}
+                source={image(product.images[0].name)}
                 style={styles.image}
               />
 

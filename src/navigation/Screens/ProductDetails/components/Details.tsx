@@ -11,16 +11,16 @@ import tags from "./tags";
 import SellerTile from "./SellerTile";
 import Animated, { FadeInDown } from "react-native-reanimated";
 
-interface IDetailsProps extends Omit<DetailsProps, "rating_id"> {
+interface IDetailsProps extends Omit<DetailsProps, "ratings"> {
   showPrice?: boolean;
-  rating_id?: ProductRatingProps[];
+  ratings?: ProductRatingProps[];
   manufacturer?: string;
   isLoading?: boolean;
 }
 
 export default function Details({
   showPrice = true,
-  rating_id = [],
+  ratings = [],
   isLoading,
   ...props
 }: Partial<IDetailsProps>) {
@@ -60,7 +60,7 @@ export default function Details({
         thumbnail={props.image!}
         prod_id={props.prod_id!}
         sharedID={props.sharedID!}
-        reviews={rating_id}
+        reviews={ratings}
         name={props.title!}
       />
 

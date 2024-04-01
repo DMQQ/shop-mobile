@@ -28,7 +28,7 @@ export interface ProductMinified {
   prod_id: number;
   price: number;
   title: string;
-  img_id: ProductImageProps[];
+  images: ProductImageProps[];
 }
 
 export interface Product {
@@ -40,8 +40,8 @@ export interface Product {
   expiration_date?: string;
   description?: string;
   category?: string;
-  img_id: ProductImageProps[];
-  rating_id?: ProductRatingProps[];
+  images: ProductImageProps[];
+  ratings?: ProductRatingProps[];
   manufacturer?: string;
   vendor?: {
     id?: number;
@@ -200,10 +200,10 @@ export interface Paging<T> {
   results: T[];
 }
 
-export interface DetailsProps extends Omit<ProductMinified, "img_id"> {
+export interface DetailsProps extends Omit<ProductMinified, "images"> {
   image: string;
   sharedID: string;
-  rating_id: ProductRatingProps[];
+  ratings: ProductRatingProps[];
   description: string;
   quantity: number;
   category: string;

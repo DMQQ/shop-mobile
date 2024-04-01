@@ -2,7 +2,7 @@
 
 import { RootStackParams } from "/@types/types";
 
-export const API = "http://srv25.mikr.us:40033";
+//export const API = "http://srv25.mikr.us:40033";
 
 function getApiRouteENV() {
   const url = process.env.API || process.env.BACKEND_URL;
@@ -12,7 +12,7 @@ function getApiRouteENV() {
   return url;
 }
 
-//export const API = getApiRouteENV();
+export const API = getApiRouteENV();
 
 export const ENDPOINTS = {
   //

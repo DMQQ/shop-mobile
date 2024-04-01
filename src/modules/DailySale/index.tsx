@@ -23,7 +23,7 @@ export default function DailySale() {
   const navigation = useNavigation<useNavigationProps>();
   const isLoaderPresent = loading || !data;
   const { cart } = useAppSelector((st) => st.cart);
-  const imgSrc = image(data?.img_id?.[0]?.name);
+  const imgSrc = image(data?.images?.[0]?.name);
 
   function toProduct(imgIndex: number) {
     data?.prod_id &&
@@ -47,7 +47,7 @@ export default function DailySale() {
             onPress={toProduct}
             prod_id={data.prod_id}
             sharedID="DAILY"
-            images={data.img_id}
+            images={data.images}
 
             //  isSharedAnimationUsed
           />

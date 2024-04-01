@@ -41,7 +41,7 @@ interface CardProps {
   product: {
     title: string;
     category: string;
-    img_id: ProductImageProps[];
+    images: ProductImageProps[];
   };
 }
 
@@ -63,7 +63,7 @@ export default function Card({
       <View style={{ padding: 10 }}>
         <Image
           style={styles.thumbnail}
-          source={image(product.img_id)}
+          source={image(product.images)}
           resizeMode="contain"
         />
       </View>

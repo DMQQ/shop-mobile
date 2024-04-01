@@ -22,7 +22,7 @@ const GET_AUCTION = gql`
         category
         quantity
         description
-        img_id(take: 3) {
+        images(take: 3) {
           id
           name
         }

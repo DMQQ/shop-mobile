@@ -54,7 +54,7 @@ export type ProductTypeProps = Types.ProductMinified & {
 function Product({
   price,
   prod_id,
-  img_id,
+  images,
   title,
   sharedID = "Key",
   style,
@@ -62,7 +62,7 @@ function Product({
 }: ProductTypeProps) {
   const navigation = useNavigation<Types.useNavigationProps>();
 
-  const imageUrl = image(img_id).uri;
+  const imageUrl = image(images).uri;
 
   const navigateProduct = () =>
     navigation.navigate("Product", {

@@ -69,7 +69,7 @@ export default function CartProduct({
 }: CartProductProps) {
   const navigation = useNavigation<useNavigationProps>();
 
-  const img = image(product.img_id);
+  const img = image(product.images);
 
   const delay = productIndex * 50; //ms
 

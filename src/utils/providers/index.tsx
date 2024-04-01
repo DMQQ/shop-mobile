@@ -40,7 +40,7 @@ export const client = new ApolloClient({
           ratings: {
             keyArgs: false,
             merge: (ex, inc, { variables }) =>
-              merge(ex, inc, "rating_id", variables),
+              merge(ex, inc, "ratings", variables),
           },
           history: {
             keyArgs: false,

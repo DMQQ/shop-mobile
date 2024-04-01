@@ -30,7 +30,7 @@ export default function ProductTile({
   isExpanded,
   onPress,
 }: ProductTileProps) {
-  const thumbnail = image(product.img_id);
+  const thumbnail = image(product.images);
 
   return (
     <Animated.View style={{ marginBottom: 10 }}>

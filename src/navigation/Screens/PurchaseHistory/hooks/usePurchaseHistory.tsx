@@ -29,7 +29,7 @@ const GET_HISTORY = gql`
           prod_id
           price
           title
-          img_id(take: 1) {
+          images(take: 1) {
             id
             name
           }
