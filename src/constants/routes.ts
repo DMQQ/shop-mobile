@@ -2,7 +2,7 @@
 
 import { RootStackParams } from "/@types/types";
 
-//export const API = "http://srv25.mikr.us:40033";
+export const API = "http://192.168.0.25:3000"; //"http://srv25.mikr.us:40033";
 
 function getApiRouteENV() {
   const url = process.env.API || process.env.BACKEND_URL;
@@ -12,7 +12,7 @@ function getApiRouteENV() {
   return url;
 }
 
-export const API = getApiRouteENV();
+//export const API = getApiRouteENV();
 
 export const ENDPOINTS = {
   //
@@ -41,15 +41,20 @@ export const ENDPOINTS = {
   dailySale: `${API}/sales/daily`,
 };
 
-export const screens = {
-  HOME: "Home",
-  LOGIN: "Login",
-  REGISTER: "Register",
-  AUCTIONS: "Auctions",
-  AUCTION: "Auction",
-  CART: "Cart",
-  USER: "User",
-  SEARCH: "Search",
-  WATCHLIST: "Watchlist",
-  PRODUCT: "Product",
+export const Screens = {
+  Home: "Home",
+  Landing: "Landing",
+  Product: "Product",
+  Cart: "Cart",
+  History: "History",
+  Search: "Search",
+  SearchResults: "SearchResults",
+  PurchaseHistory: "PurchaseHistory",
+  Details: "Details",
+  Watchlist: "Watchlist",
+  User: "User",
+  Checkout: "Checkout",
+  CreateReview: "CreateReview",
+  ProductReviews: "ProductReviews",
+  Settings: "Settings",
 };

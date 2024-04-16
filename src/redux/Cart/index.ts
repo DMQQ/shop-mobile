@@ -70,8 +70,6 @@ const cartSlice = createSlice({
 
       if (payload.removeAll) {
         state.cart = [];
-        state.amount = 0;
-        return;
       } else {
         for (const product of state.cart) {
           if (product.cart_id === payload.cart_id && product.ammount > 1) {

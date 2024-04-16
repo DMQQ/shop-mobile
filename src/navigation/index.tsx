@@ -1,4 +1,8 @@
-import { DarkTheme, NavigationContainer } from "@react-navigation/native";
+import {
+  DarkTheme,
+  NavigationContainer,
+  NavigationContainerRef,
+} from "@react-navigation/native";
 import React, { useEffect } from "react";
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
 import type { RootStackParams } from "/@types/types";
@@ -10,7 +14,8 @@ import useColorTheme from "@utils/context/ThemeContext";
 import useNotifications from "utils/notifications/MainNotifications";
 import axios from "axios";
 
-export const navigationRef = React.createRef<any>();
+export const navigationRef =
+  React.createRef<NavigationContainerRef<RootStackParams>>();
 
 export const Stack = createSharedElementStackNavigator<RootStackParams>();
 
@@ -69,7 +74,6 @@ const Navigator = ({
             options={Option.homeScreenOptions}
           />
           <Stack.Screen name="Auctions" component={Screen.Auctions} />
-          {/* <Stack.Screen name="Dashboard" component={Screen.Dashboard} /> */}
           <Stack.Screen name="Upload" component={Screen.Upload} />
           <Stack.Screen
             name="Auction"
@@ -98,11 +102,6 @@ const Navigator = ({
             component={Screen.Watchlist}
             options={Option.watchlistScreenOptions}
             name="Watchlist"
-            // NIE POTRZEBNE
-            // sharedElements={(route) => {
-            //   const { prod_id, sharedID } = route.params;
-            //   return ["prod_id." + prod_id + sharedID];
-            // }}
           />
           <Stack.Screen
             component={Screen.ProductDetails}

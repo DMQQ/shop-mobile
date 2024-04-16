@@ -90,7 +90,7 @@ export type NestedSearchScreens = {
 
 export type RootStackParams = {
   initialRouteName: Object | undefined;
-  Search: NestedSearchScreens;
+  Search?: NestedSearchScreens;
   Home: undefined;
   Auction: { auction_id: string; title?: string };
   Auctions: undefined;

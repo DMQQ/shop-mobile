@@ -4,9 +4,7 @@ import type {
   UserContextType,
   UserType,
 } from "/@types/types";
-import { hideAsync } from "expo-splash-screen";
 import { setItemAsync, getItemAsync, deleteItemAsync } from "expo-secure-store";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const USER_PREFIX = "react-native-shop-user";
 

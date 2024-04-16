@@ -10,7 +10,7 @@ export default function AppLoader() {
         justifyContent: "center",
       }}
     >
-      <ActivityIndicator color="white" size={100} />
+      <ActivityIndicator color={Colors.secondary} size={100} />
     </View>
   );
 }

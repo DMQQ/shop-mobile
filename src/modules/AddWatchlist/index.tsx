@@ -8,10 +8,9 @@ import { useNavigationProps } from "/@types/types";
 
 interface AddWatchlistProps {
   prod_id: number;
+
   paddingHorizontal?: number;
-
   style?: StyleProp<ViewStyle>;
-
   iconColor?: string;
   iconSize?: number;
 }
