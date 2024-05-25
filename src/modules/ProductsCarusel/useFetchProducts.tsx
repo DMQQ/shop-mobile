@@ -36,7 +36,8 @@ export default function useFetchProducts(path: string) {
           removeDuplicatesById([...prev, ...response.data.results], "prod_id")
         );
         setHasMore(response.data.hasMore);
-      } catch (error) {
+      } catch (error: any) {
+        setError(error?.message || "Something went wrong");
       } finally {
         setLoading(false);
       }

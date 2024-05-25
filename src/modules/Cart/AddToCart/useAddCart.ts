@@ -31,6 +31,8 @@ export default function useCart(prod_id: number) {
       setResult("Added");
     } catch (error: any) {
       setError(error?.["message"]);
+
+      console.log(error);
     } finally {
       setLoading(false);
     }

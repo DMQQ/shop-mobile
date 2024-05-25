@@ -1,6 +1,6 @@
 import useFetch from "./utils/hooks/useFetch";
 import { useDispatch } from "react-redux";
-import { userActions } from "./redux/User";
+import { CredentialsProps, userActions } from "./redux/User";
 import MainNavigator from "navigation";
 import useLoadApp from "utils/hooks/useLoadApp";
 import { useAppSelector } from "utils/hooks/hooks";
@@ -13,7 +13,7 @@ export default function InitApp() {
   useFetch("/auth/credentials", {
     invalidate: [isLoggedIn],
     fetchOnMount: isLoggedIn,
-    onSuccess: (data: any) => {
+    onSuccess: (data: CredentialsProps) => {
       dispatch(userActions.setCredentials(data));
     },
   });

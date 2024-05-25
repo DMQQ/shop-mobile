@@ -35,6 +35,11 @@ const defaultFadeInScreenAnimation: StackNavigationOptions = {
       ],
     },
   }),
+
+  transitionSpec: {
+    open: { animation: "timing", config: { duration: 250 } },
+    close: { animation: "timing", config: { duration: 250 } },
+  },
 };
 
 export const horizontalAnimation: StackNavigationOptions = {
@@ -91,12 +96,8 @@ export const detailsScreenOptions = ({
   headerTitle: route?.params?.title?.split("").slice(0, 30).join(""),
   headerTitleAlign: "center",
   detachPreviousScreen: false,
-  transitionSpec: {
-    open: { animation: "timing", config: { duration: 200 } },
-    close: { animation: "timing", config: { duration: 200 } },
-  },
 
-  ...(!route.params.isSharedAnimationUsed && horizontalAnimation),
+  // ...(!route.params.isSharedAnimationUsed && horizontalAnimation),
 });
 
 export const checkOutScreenOptions: StackNavigationOptions = {

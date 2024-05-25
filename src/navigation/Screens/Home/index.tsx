@@ -45,7 +45,7 @@ export default function Home() {
 
           <Carusels />
 
-          <View style={{ marginVertical: 25 }} />
+          <View style={{ marginVertical: 15 }} />
         </ScrollView>
       </GestureDetector>
     </Sidebar>

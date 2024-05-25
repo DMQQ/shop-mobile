@@ -26,17 +26,24 @@ export default function Landing({ navigation }: any) {
     <ScreenContainer style={[styles.container]}>
       <View
         style={{
-          flex: 3,
+          flex: 1,
           flexDirection: "column",
           alignItems: "flex-start",
           padding: 15,
           width: "100%",
         }}
       >
-        <ThemedText style={{ fontSize: 32, fontWeight: "bold" }}>
-          Create an account and visit view our sales offers
+        <ThemedText style={{ fontSize: 24, fontWeight: "bold" }}>
+          Hi there!
         </ThemedText>
-        <ThemedText style={{ fontSize: 18, fontWeight: "400", color: "gray" }}>
+        <ThemedText
+          style={{
+            fontSize: 16,
+            fontWeight: "400",
+            color: "gray",
+            marginTop: 10,
+          }}
+        >
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis,
           a, sunt ex fuga officiis fugit omnis error id aliquid velit atque.
           Obcaecati id accusantium beatae minus ex. Autem, illum a!

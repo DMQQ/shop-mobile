@@ -9,7 +9,11 @@ interface ProductResponse {
   suggestions?: ProductMinified[];
 }
 
-export default function useProduct(prod_id: number, name: string) {
+export default function useProduct(
+  prod_id: number,
+  name: string,
+  skip: boolean = false
+) {
   const { user } = useUser();
 
   const query = useQuery<ProductResponse>(GET_PRODUCT, {
@@ -22,14 +26,11 @@ export default function useProduct(prod_id: number, name: string) {
         token: user.token,
       },
     },
+
+    skip,
+
     onError: (err) => console.log(JSON.stringify(err, null, 2)),
   });
-
-  useEffect(() => {
-    return () => {
-      query.client.stop();
-    };
-  }, []);
 
   return query;
 }

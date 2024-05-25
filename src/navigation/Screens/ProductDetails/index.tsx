@@ -6,7 +6,6 @@ import styles from "./styles";
 import useColorTheme from "@utils/context/ThemeContext";
 import ProductSuggestion from "./components/ProductSuggestion";
 import BottomTab from "./components/BottomTab";
-import { wait } from "functions/wait";
 import Details from "./components/Details";
 import useProduct from "./hooks/useProduct";
 import CartSheet from "@modules/Cart/CartSheet";
@@ -21,6 +20,7 @@ import Animated, {
 } from "react-native-reanimated";
 import ImagesModal from "./components/ImagesModal";
 import useListenBackPress from "utils/hooks/useListenBackPress";
+import useInteractionManager from "./hooks/useInteractionManager";
 
 export default function ProductDetails({
   route,
@@ -28,7 +28,9 @@ export default function ProductDetails({
 }: Required<ScreenNavigationProps<"Product">>) {
   const { prod_id, image, sharedID, title } = route.params;
 
-  const { data, refetch, loading } = useProduct(prod_id, title);
+  const isQuerySkipped = useInteractionManager(navigation, prod_id, title);
+
+  const { data, refetch, loading } = useProduct(prod_id, title, isQuerySkipped);
   const product = data?.product;
 
   const images = (() => {
@@ -43,10 +45,10 @@ export default function ProductDetails({
 
   const [refreshing, setRefreshing] = useState(false);
 
-  const onRefresh = useCallback(() => {
+  const onRefresh = useCallback(async () => {
     setRefreshing(true);
-    refetch({ prod_id, name: title.split(" ").slice(0, 2).join(" ") });
-    wait(2000).then(() => setRefreshing(false));
+    await refetch({ prod_id, name: title.split(" ").slice(0, 2).join(" ") });
+    setRefreshing(false);
   }, []);
 
   const { cart } = useAppSelector((state) => state.cart);
@@ -98,13 +100,12 @@ export default function ProductDetails({
         </Animated.Text>
       ),
     });
-  }, [imagesModalVisible]);
+  }, [title]);
 
   useListenBackPress(() => {
-    if (navigation.canGoBack()) navigation.pop();
-
-    return true;
-  }, []);
+    if (imagesModalVisible) setImagesModalVisible(false);
+    return imagesModalVisible;
+  }, [imagesModalVisible]);
 
   return (
     <View style={{ flex: 1, backgroundColor: theme.primary }}>

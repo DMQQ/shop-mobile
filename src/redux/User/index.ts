@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface CredentialsProps {
+export interface CredentialsProps {
   name: string;
   surname: string;
   address: string;

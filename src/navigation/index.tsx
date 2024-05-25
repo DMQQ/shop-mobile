@@ -27,6 +27,7 @@ export default function MainNavigator() {
     <>
       <StatusBar backgroundColor={theme.primary} />
       <NavigationContainer
+        fallback={<></>}
         ref={navigationRef}
         theme={current === "dark" ? DarkTheme : undefined}
       >
@@ -58,7 +59,7 @@ const Navigator = ({
 
   return (
     <Stack.Navigator
-      detachInactiveScreens={false}
+      detachInactiveScreens
       initialRouteName={isLoggedIn ? "Home" : "Landing"}
       screenOptions={{
         ...Option.defaultStackOptions,
@@ -167,6 +168,10 @@ const Navigator = ({
             name="PurchaseHistory"
             component={Screen.PurchaseHistory}
             options={Option.purchaseHistoryOption}
+            sharedElements={(route) => {
+              const { sharedID, prod_id } = route.params;
+              return ["prod_id." + prod_id + sharedID];
+            }}
           />
         </>
       ) : (
