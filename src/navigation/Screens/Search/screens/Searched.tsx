@@ -16,34 +16,24 @@ export default function Searched({
   navigation,
 }: SearchNestedScreenProps<"Searched">) {
   const isFocused = useIsFocused();
-  const {
-    getSuggestionsAsync,
-    results,
-    onEndReached,
-    skip,
-    hasMore,
-    searchedText,
-  } = useSearch();
+  const { getSuggestionsAsync, results, onEndReached, skip, searchedText } =
+    useSearch();
 
   useEffect(() => {
     const promise = getSuggestionsAsync(true);
 
     return () => promise.abort();
-  }, [skip, searchedText]);
-
-  // useEffect(() => {
-  //   if (isFocused) {
-  //     const promise = getSuggestionsAsync(false);
-
-  //     return () => promise.abort();
-  //   }
-  // }, [isFocused, searchedText]);
+  }, [skip, searchedText, isFocused]);
 
   return (
     <ScreenContainer>
       <InputHeaderControll mode="display" />
       <ActiveFiltersList
-        handleOpenFilters={() => navigation.navigate("Filters", {})}
+        handleOpenFilters={() =>
+          navigation.navigate("Filters", {
+            focusedFilter: "search",
+          })
+        }
       />
       <VirtualizedList
         style={{ marginTop: 15, flex: 1 }}

@@ -38,6 +38,22 @@ export const getSearchedProducts = createAsyncThunk<ThunkResponse, SearchState>(
           token: args.token,
         },
         params: {
+          ...(args.filters.category !== "All" && {
+            category: args.filters.category,
+          }),
+
+          ...(args.filters.price.min !== 0 && {
+            minPrice: args.filters.price.min,
+          }),
+
+          ...(args.filters.price.max !== 0 && {
+            maxPrice: args.filters.price.max,
+          }),
+
+          ...(args.filters.sorting !== "newest" && {
+            sort: args.filters.sorting,
+          }),
+
           q: args.searchedText,
           skip: args.skip,
         },
@@ -45,6 +61,8 @@ export const getSearchedProducts = createAsyncThunk<ThunkResponse, SearchState>(
 
       return { ...response.data, isInfiniteScroll: args.isInfiniteScroll };
     } catch (error) {
+      console.log({ error });
+
       abort();
       return rejectWithValue({});
     }
@@ -58,6 +76,8 @@ const initialState = {
   },
 
   isLoading: false,
+
+  isChanged: false,
 
   error: "",
 
@@ -105,6 +125,9 @@ export const searchSlice = createSlice({
       }>
     ) {
       state.filters[action.payload.key] = action.payload.value;
+      state.isChanged = true;
+
+      state.response.results = [];
     },
 
     clearAllFilters(state) {
@@ -118,6 +141,7 @@ export const searchSlice = createSlice({
       }
     ) {
       state.filters[action.payload] = initialState.filters[action.payload];
+      state.isChanged = true;
     },
 
     setSearchHistory(state, { payload }) {
@@ -135,14 +159,17 @@ export const searchSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(getSearchedProducts.fulfilled, (state, { payload }) => {
-      state.response.results = payload.isInfiniteScroll
-        ? removeDuplicatesById(
-            [...state.response.results, ...payload.results],
-            "prod_id"
-          )
-        : payload.results;
+      if (payload.isInfiniteScroll) {
+        state.response.results = removeDuplicatesById(
+          [...state.response.results, ...payload.results],
+          "prod_id"
+        );
+      } else if (payload.results && !payload.isInfiniteScroll) {
+        state.response.results = payload.results;
+      }
 
       state.response.hasMore = payload.hasMore;
+      state.isLoading = false;
     });
 
     builder.addCase(getSearchedProducts.rejected, (state, { payload }) => {});

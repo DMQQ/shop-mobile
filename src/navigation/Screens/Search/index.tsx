@@ -18,7 +18,14 @@ export default function SearchScreen() {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Searched" component={Searched} />
+      <Stack.Screen
+        name="Searched"
+        sharedElements={(route) => {
+          const { prod_id } = route.params;
+          return ["prod_id" + prod_id + "Searched"];
+        }}
+        component={Searched}
+      />
       <Stack.Screen name="Filters" component={Filters} />
       <Stack.Screen name="Query" component={Query} />
     </Stack.Navigator>

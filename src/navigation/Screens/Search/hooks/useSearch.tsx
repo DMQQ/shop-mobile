@@ -7,7 +7,7 @@ export default function useSearch() {
     user: { token },
   } = useUser();
 
-  const { filters, searchedText, skip, response } = useAppSelector(
+  const { filters, searchedText, skip, response, isChanged } = useAppSelector(
     (state) => state.search
   );
 
@@ -33,5 +33,6 @@ export default function useSearch() {
     skip,
     hasMore: response.hasMore,
     searchedText,
+    isChanged,
   };
 }
