@@ -23,7 +23,7 @@ export default function Purchase({ cart, total }: PurchaseProps) {
   const navigation = useNavigation<useNavigationProps>();
 
   function PurchaseProduct() {
-    navigation.navigate("Checkout", { cart, total });
+    navigation.push("Checkout", { cart, total });
   }
 
   const disabled = cart.length === 0;

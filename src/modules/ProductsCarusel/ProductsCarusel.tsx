@@ -13,6 +13,10 @@ import {
   PRODUCT_WIDTH_FULLSIZE,
 } from "modules/Product/assets";
 import layout from "constants/layout";
+import Ripple from "react-native-material-ripple";
+import { useNavigation } from "@react-navigation/native";
+import { useNavigationProps } from "/@types/types";
+import { API } from "constants/routes";
 
 interface MostRecentProps {
   path: string;
@@ -20,6 +24,8 @@ interface MostRecentProps {
   sharedID: string;
   refresh: boolean;
   center?: boolean;
+
+  orientation?: "vertical" | "horizontal";
 }
 
 const getItem = (data: ProductTypeProps[], key: number) => {
@@ -30,6 +36,7 @@ function ProductsCarusel({
   path,
   title,
   sharedID,
+  orientation = "horizontal",
   center = false,
 }: MostRecentProps) {
   const { theme } = useColorTheme();
@@ -58,9 +65,29 @@ function ProductsCarusel({
     []
   );
 
+  const navigation = useNavigation<useNavigationProps>();
+
   return (
     <View style={caruselStyles.container}>
-      <Text style={[caruselStyles.title, { color: theme.text }]}>{title}</Text>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Text style={[caruselStyles.title, { color: theme.text }]}>
+          {title}
+        </Text>
+
+        <Ripple
+          onPress={() =>
+            navigation.navigate("Products", { path: path.replace(API, "") })
+          }
+        >
+          <Text style={[{ color: "#fff" }]}>See all</Text>
+        </Ripple>
+      </View>
 
       {isLoading && <ProductSkeleton />}
 
@@ -80,7 +107,7 @@ function ProductsCarusel({
         snapToOffsets={snapToOffsets}
         data={data}
         onEndReached={onEndReached}
-        horizontal
+        horizontal={orientation === "horizontal"}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         getItem={getItem}

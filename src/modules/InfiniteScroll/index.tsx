@@ -75,6 +75,8 @@ export default function InfiniteScroll<T>({
       )}
 
       <VirtualizedList
+        removeClippedSubviews={true}
+        windowSize={5}
         onEndReachedThreshold={0.5}
         onEndReached={onSkip}
         horizontal={orientation === "horizontal"}

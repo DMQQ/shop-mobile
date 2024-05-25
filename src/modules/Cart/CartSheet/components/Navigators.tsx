@@ -21,8 +21,9 @@ export default function Navigators({
         onPress={() => {
           navigation.navigate("Cart", {
             scrollToProductOnOpen: true,
-            selectedProductId: prod_id,
-            sharedID: "",
+            selectedProductId: prod_id, // this is the reason that shared animation is not working for cart products
+            sharedID: "Cart",
+            prod_id,
           });
           sheet.close();
         }}

@@ -1,5 +1,6 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import { ParamListBase, RouteProp } from "@react-navigation/native";
+import SCREENS from "constants/routes";
 
 export type UserContextProviderType = {
   children: React.ReactNode;
@@ -89,61 +90,57 @@ export type NestedSearchScreens = {
 };
 
 export type RootStackParams = {
-  initialRouteName: Object | undefined;
-  Search?: NestedSearchScreens;
-  Home: undefined;
-  Auction: { auction_id: string; title?: string };
-  Auctions: undefined;
-  PurchaseHistory: undefined;
-  Cart: {
-    selectedProductId?: number;
-    scrollToProductOnOpen?: boolean;
+  [SCREENS.INITIAL_ROUTE_NAME]: Object | undefined;
+  [SCREENS.SEARCH]?: NestedSearchScreens;
+  [SCREENS.HOME]: undefined;
+  [SCREENS.AUCTION]: { auction_id: string; title?: string };
+  [SCREENS.AUCTIONS]: undefined;
+  [SCREENS.PURCHASE_HISTORY]: undefined;
+  [SCREENS.CART]: Partial<{
+    selectedProductId: number;
+    scrollToProductOnOpen: boolean;
     sharedID: string;
-  };
-  User: undefined;
-  Auth?: undefined;
-  Landing: undefined;
-  Dashboard: undefined;
-  Register?: undefined;
-  Login?: {
+    prod_id: number;
+  }>;
+  [SCREENS.USER]: undefined;
+  [SCREENS.AUTH]?: undefined;
+  [SCREENS.LANDING]: undefined;
+  [SCREENS.DASHBOARD]: undefined;
+  [SCREENS.REGISTER]?: undefined;
+  [SCREENS.LOGIN]?: {
     email?: string;
     password?: string;
   };
-  Watchlist?: undefined;
-  Upload: undefined;
-  MyReviews: undefined;
-  AccountSettings: undefined;
-  SearchResults: { category: string; options?: Object };
-  // Details:
-  Product: {
+  [SCREENS.WATCHLIST]?: undefined;
+  [SCREENS.UPLOAD]: undefined;
+  [SCREENS.MY_REVIEWS]: undefined;
+  [SCREENS.ACCOUNT_SETTINGS]: undefined;
+  [SCREENS.SEARCH_RESULTS]: { category: string; options?: Object };
+  [SCREENS.PRODUCT]: {
     prod_id: number;
     sharedID: string;
     image: string;
     title: string;
-
     isSharedAnimationUsed?: boolean;
-
     previousScreen?: string;
   };
-  CreateReview: {
+  [SCREENS.CREATE_REVIEW]: {
     prod_id: number;
     thumbnail: string;
     sharedID: string;
     prod_name: string;
   };
-  ProductReviews: {
+  [SCREENS.PRODUCT_REVIEWS]: {
     reviews: any[];
     prod_name: string;
     prod_id: number;
     sharedID: string;
   };
-  ///
-  Checkout: { cart: any[]; total: number };
-
-  Checkout_details: undefined;
-  Checkout_payment: undefined;
-
-  ImagePreview: { images: ProductImageProps[] };
+  [SCREENS.CHECKOUT]: { cart: any[]; total: number };
+  [SCREENS.CHECKOUT_DETAILS]: undefined;
+  [SCREENS.CHECKOUT_PAYMENT]: undefined;
+  [SCREENS.IMAGE_PREVIEW]: { images: ProductImageProps[] };
+  [SCREENS.PRODUCTS]: { path?: string };
 };
 
 export type useNavigationProps = StackNavigationProp<RootStackParams>;

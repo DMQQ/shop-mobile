@@ -1,4 +1,5 @@
 import {
+  CommonActions,
   DarkTheme,
   NavigationContainer,
   NavigationContainerRef,
@@ -13,6 +14,7 @@ import { StatusBar } from "expo-status-bar";
 import useColorTheme from "@utils/context/ThemeContext";
 import useNotifications from "utils/notifications/MainNotifications";
 import axios from "axios";
+import SCREENS from "constants/routes";
 
 export const navigationRef =
   React.createRef<NavigationContainerRef<RootStackParams>>();
@@ -59,8 +61,7 @@ const Navigator = ({
 
   return (
     <Stack.Navigator
-      detachInactiveScreens
-      initialRouteName={isLoggedIn ? "Home" : "Landing"}
+      initialRouteName={isLoggedIn ? SCREENS.HOME : SCREENS.LANDING}
       screenOptions={{
         ...Option.defaultStackOptions,
         headerStyle: { backgroundColor: theme.primary },
@@ -70,52 +71,63 @@ const Navigator = ({
       {isLoggedIn ? (
         <>
           <Stack.Screen
-            name="Home"
+            name={SCREENS.HOME}
             component={Screen.Home}
             options={Option.homeScreenOptions}
           />
-          <Stack.Screen name="Auctions" component={Screen.Auctions} />
-          <Stack.Screen name="Upload" component={Screen.Upload} />
+          <Stack.Screen name={SCREENS.AUCTIONS} component={Screen.Auctions} />
+          <Stack.Screen name={SCREENS.UPLOAD} component={Screen.Upload} />
           <Stack.Screen
-            name="Auction"
+            name={SCREENS.AUCTION}
             component={Screen.Auction}
             options={Option.auctionOptions}
           />
           <Stack.Screen
-            name="Cart"
+            name={SCREENS.CART}
             component={Screen.Cart}
-            initialParams={{ sharedID: "Cart" }}
+            initialParams={{ sharedID: SCREENS.CART }}
             options={Option.cartScreenOptions}
-            sharedElements={({ params }) => {
-              return !!params.selectedProductId
-                ? ["prod_id." + params.selectedProductId + params.sharedID]
-                : [];
+            sharedElements={({ params }, opt) => {
+              if ([SCREENS.PRODUCT, SCREENS.CART].includes(opt.name as any)) {
+                return !!params.selectedProductId
+                  ? ["prod_id." + params.selectedProductId + params.sharedID]
+                  : ["prod_id." + params.prod_id + params.sharedID];
+              }
             }}
           />
 
           <Stack.Screen
             component={Screen.User}
-            name="User"
+            name={SCREENS.USER}
             options={() => Option.userScreenOptions(name)}
           />
 
           <Stack.Screen
             component={Screen.Watchlist}
             options={Option.watchlistScreenOptions}
-            name="Watchlist"
+            name={SCREENS.WATCHLIST}
           />
           <Stack.Screen
             component={Screen.ProductDetails}
-            name="Product"
+            name={SCREENS.PRODUCT}
             options={Option.detailsScreenOptions}
             sharedElements={({ params }, opt) => {
               const { prod_id, sharedID, isSharedAnimationUsed } = params;
-              //prettier-ignore
-              const valid = ["Home","Search","SearchResults","PurchaseHistory","Details",'Watchlist',"Cart"];
+              const valid = [
+                SCREENS.HOME,
+                SCREENS.SEARCH,
+                SCREENS.SEARCH_RESULTS,
+                SCREENS.PURCHASE_HISTORY,
+                // SCREENS.PRODUCT, // dont use shared animation on product screen itself
+                SCREENS.WATCHLIST,
+                SCREENS.CART,
+                SCREENS.PRODUCTS,
+                SCREENS.SEARCH,
+              ];
 
               if (
                 sharedID &&
-                valid.includes(opt.name) &&
+                valid.includes(opt.name as any) &&
                 isSharedAnimationUsed
               ) {
                 return ["prod_id." + prod_id + sharedID];
@@ -124,19 +136,19 @@ const Navigator = ({
           />
 
           <Stack.Screen
-            name="Checkout"
+            name={SCREENS.CHECKOUT}
             component={Screen.Checkout}
             options={Option.checkOutScreenOptions}
           />
           <Stack.Screen
-            name="SearchResults"
+            name={SCREENS.SEARCH_RESULTS}
             component={Screen.SearchResults}
             options={({ route }) => ({
               title: `Looking for: ${route.params.category}`,
             })}
           />
           <Stack.Screen
-            name="CreateReview"
+            name={SCREENS.CREATE_REVIEW}
             component={Screen.CreateReview}
             sharedElements={(route) => {
               const { prod_id, sharedID } = route.params;
@@ -145,27 +157,27 @@ const Navigator = ({
             options={Option.createReviewOptions}
           />
           <Stack.Screen
-            name="ProductReviews"
+            name={SCREENS.PRODUCT_REVIEWS}
             component={Screen.ProductReviews}
             options={Option.productReviewsOption}
           />
           <Stack.Screen
-            name="MyReviews"
+            name={SCREENS.MY_REVIEWS}
             component={Screen.MyReviews}
             options={Option.myReviewsOption}
           />
           <Stack.Screen
-            name="AccountSettings"
+            name={SCREENS.ACCOUNT_SETTINGS}
             component={Screen.AccountSettings}
             options={Option.accountSettingsOption}
           />
           <Stack.Screen
-            name="Search"
+            name={SCREENS.SEARCH}
             component={Screen.SearchScreen}
             options={Option.searchOptions}
           />
           <Stack.Screen
-            name="PurchaseHistory"
+            name={SCREENS.PURCHASE_HISTORY}
             component={Screen.PurchaseHistory}
             options={Option.purchaseHistoryOption}
             sharedElements={(route) => {
@@ -173,22 +185,24 @@ const Navigator = ({
               return ["prod_id." + prod_id + sharedID];
             }}
           />
+
+          <Stack.Screen name={SCREENS.PRODUCTS} component={Screen.Products} />
         </>
       ) : (
         <>
           <Stack.Screen
-            name="Landing"
+            name={SCREENS.LANDING}
             component={Screen.Landing}
             options={Option.landingOptions}
           />
 
           <Stack.Screen
-            name="Register"
+            name={SCREENS.REGISTER}
             component={Screen.Register}
             options={Option.authOptions}
           />
           <Stack.Screen
-            name="Login"
+            name={SCREENS.LOGIN}
             component={Screen.Login}
             options={Option.authOptions}
           />

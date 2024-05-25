@@ -43,12 +43,14 @@ export default function useInfiniteScrolling<T, K extends {}>(
 
       if (data !== undefined && data.message !== "Token expired") {
         setState((prev) => ({
-          ...prev,
+          error: "",
           hasMore: data.hasMore,
-          data: RemoveProductsRepetition(
-            [...(prev.data || []), ...(data.results || [])],
-            !!data.results[0].prod_id ? "prod_id" : "id"
-          ),
+          // data: RemoveProductsRepetition(
+          //   [...prev.data, ...(data.results || [])],
+          //   !!data.results[0].prod_id ? "prod_id" : "id"
+          // ),
+
+          data: [...prev.data, ...(data.results || [])],
           loading: false,
         }));
       }
@@ -56,7 +58,7 @@ export default function useInfiniteScrolling<T, K extends {}>(
       setState((prev) => ({
         ...prev,
         loading: false,
-        error: error?.response?.data?.message || error.message,
+        error: "Error",
       }));
     }
 
@@ -64,7 +66,11 @@ export default function useInfiniteScrolling<T, K extends {}>(
   };
 
   useEffect(() => {
-    fetchData();
+    (async () => {
+      const cancel = await fetchData();
+
+      return () => cancel();
+    })();
   }, [skip]);
 
   return {

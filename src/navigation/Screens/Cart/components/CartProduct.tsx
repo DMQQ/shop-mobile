@@ -62,7 +62,7 @@ interface CartProductProps {
 export default function CartProduct({
   product,
   handleSelectProduct,
-  isProductSelected,
+
   showCheckbox,
   handleShowCheckbox,
   productIndex = 0,
@@ -76,6 +76,8 @@ export default function CartProduct({
   const sharedID = "Cart";
 
   const navigate = () => {
+    navigation.setParams({ selectedProductId: product.prod_id });
+
     navigation.push("Product", {
       sharedID: sharedID,
       title: product.title,

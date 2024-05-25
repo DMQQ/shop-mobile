@@ -7,15 +7,11 @@ import {
   StyleProp,
   ViewStyle,
 } from "react-native";
-import { useIsFocused, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { SharedElement } from "react-navigation-shared-element";
 import styles from "./styles";
 import * as Types from "../../@types/types";
-import {
-  PRODUCT_HEIGHT,
-  PRODUCT_WIDTH,
-  PRODUCT_WIDTH_FULLSIZE,
-} from "./assets";
+import { PRODUCT_WIDTH_FULLSIZE } from "./assets";
 import { CartButton, WatchlistButton } from "./ActionButtons";
 import { image } from "functions/image";
 import Animated from "react-native-reanimated";
@@ -74,7 +70,14 @@ function Product({
       isSharedAnimationUsed: true,
     });
 
-  const ElementWidth = fullSize ? PRODUCT_WIDTH_FULLSIZE : PRODUCT_WIDTH;
+  const ElementWidth = (() => {
+    if ((style as any)?.["width"]) return (style as any)["width"];
+
+    if (fullSize) {
+      return SCREEN_WIDTH;
+    }
+    return PRODUCT_WIDTH_FULLSIZE;
+  })();
 
   return (
     <TouchableOpacity
@@ -82,11 +85,12 @@ function Product({
       activeOpacity={0.95}
       style={[
         styles.container,
-        style,
+
         {
           width: fullSize ? SCREEN_WIDTH : PRODUCT_WIDTH_FULLSIZE,
           marginHorizontal: 5,
         },
+        style,
       ]}
     >
       <View style={[styles.product, { width: ElementWidth }]}>

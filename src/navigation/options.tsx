@@ -37,8 +37,8 @@ const defaultFadeInScreenAnimation: StackNavigationOptions = {
   }),
 
   transitionSpec: {
-    open: { animation: "timing", config: { duration: 250 } },
-    close: { animation: "timing", config: { duration: 250 } },
+    open: { animation: "timing", config: { duration: 300 } },
+    close: { animation: "timing", config: { duration: 300 } },
   },
 };
 
@@ -120,7 +120,11 @@ export const cartScreenOptions: StackNavigationOptions = {
   // ...horizontalAnimationFromLeft,
   ...defaultStackOptions,
 
-  // detachPreviousScreen: true,
+  animationEnabled: true,
+
+  animationTypeForReplace: "pop",
+
+  detachPreviousScreen: true,
 };
 
 export const watchlistScreenOptions: StackNavigationOptions = {
