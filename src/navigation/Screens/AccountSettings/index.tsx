@@ -4,7 +4,6 @@ import useColorTheme from "@utils/context/ThemeContext";
 import styles from "./styles";
 import { Container, Header } from "@components/index";
 import BottomSheet from "@gorhom/bottom-sheet";
-import useListenKeyboard from "utils/hooks/useListenKeyboard";
 import SettingsBottomSheet from "navigation/Screens/AccountSettings/components/SettingsSheet";
 import Options from "./components/Options";
 
@@ -20,16 +19,9 @@ export default function AccountSettings() {
   const [option, setOption] = useState<CurrentOptionType>("");
   const [text, setText] = useState("");
   const sheetRef = useRef<null | BottomSheet>(null);
-  const { status } = useListenKeyboard();
-
-  useLayoutEffect(() => {
-    if (status === "open") {
-      sheetRef.current?.snapToIndex(0.75);
-    }
-  }, [status]);
 
   function onSheetOpen(variant: CurrentOptionType) {
-    sheetRef.current?.snapToPosition("50%");
+    sheetRef.current?.snapToIndex(0);
     setText("");
     setOption(variant);
   }

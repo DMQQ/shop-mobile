@@ -1,7 +1,7 @@
-import React, { useLayoutEffect, useRef, useEffect } from "react";
-import { View, Text, Alert, VirtualizedList } from "react-native";
-import Purchase from "navigation/Screens/Cart/Purchase/Purchase";
-import CartList from "navigation/Screens/Cart/CartList";
+import React, { useLayoutEffect, useRef } from "react";
+import { View, Alert, VirtualizedList } from "react-native";
+import Purchase from "./components/CartDetails";
+import CartList from "./components/CartList";
 import useColorTheme from "@utils/context/ThemeContext";
 import { useCart } from "./hooks/useCart";
 import { ScreenNavigationProps } from "/@types/types";

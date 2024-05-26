@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   button: {
     width: "100%",
     padding: Padding.large,
-    backgroundColor: Colors.primary100,
+    backgroundColor: Colors.primary_light,
     borderRadius: 5,
     flexDirection: "row",
     justifyContent: "space-between",

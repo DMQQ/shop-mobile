@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from "react";
-import AuthForm from "@modules/AuthForm/AuthForm";
+import AuthForm from "../components/AuthForm/AuthForm";
 import useAuth from "@utils/hooks/useAuth";
 import { Container } from "@components/index";
 import RegisterModal from "../components/RegisterModal";

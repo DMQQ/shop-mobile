@@ -1,25 +1,49 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useMemo } from "react";
-import { View, Text } from "react-native";
-import { ProductMinified, useNavigationProps } from "../../../../@types/types";
-import Button from "../../../../components/ui/Button/Button";
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { ProductMinified, useNavigationProps } from "/@types/types";
+import { Button } from "@components/index";
 import useColorTheme from "@utils/context/ThemeContext";
-import { CalcTotalCartPrice } from "../../../../functions/CalcTotalCartPrice";
-import styles from "./Purchases.styles";
 import Color from "color";
 import { Colors } from "constants/styles";
-import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+const styles = StyleSheet.create({
+  container: {
+    width: "100%",
+    alignItems: "center",
+    padding: 10,
+    marginVertical: 5,
+    borderTopWidth: 1,
+  },
+  content: {
+    width: "90%",
+    paddingBottom: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  text: {
+    fontSize: 20,
+    fontFamily: "PoppinsRegular",
+  },
+  button: {
+    width: "95%",
+    justifyContent: "center",
+    padding: 15,
+    marginTop: 10,
+  },
+});
 
 interface CartProduct extends ProductMinified {
   ammount: number;
 }
 
-interface PurchaseProps {
+interface CartDetailsProps {
   cart: CartProduct[];
   total: number;
 }
 
-export default function Purchase({ cart, total }: PurchaseProps) {
+export default function CartDetails({ cart, total }: CartDetailsProps) {
   const navigation = useNavigation<useNavigationProps>();
 
   function PurchaseProduct() {

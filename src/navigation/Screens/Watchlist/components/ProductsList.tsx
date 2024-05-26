@@ -1,27 +1,19 @@
-import { VirtualizedList, View, Image, Text } from "react-native";
+import { View, Image, Text } from "react-native";
 import ProductTile, { TILE_WIDTH } from "./ProductTile";
-import { useCallback, useState } from "react";
-import type {
-  Product,
-  ProductImageProps,
-  ProductMinified,
-} from "/@types/types";
+import { useCallback } from "react";
+import type { ProductMinified } from "/@types/types";
 import { useAppSelector } from "utils/hooks/hooks";
-import { wait } from "functions/wait";
 import { MasonryFlashList } from "@shopify/flash-list";
 import BottomSheet, {
   BottomSheetBackdrop,
   BottomSheetBackdropProps,
-  BottomSheetFlatList,
 } from "@gorhom/bottom-sheet";
 import { Colors } from "constants/styles";
-import Button from "components/ui/Button/Button";
 import { image } from "functions/image";
 import Color from "color";
-import { AntDesign, FontAwesome5 } from "@expo/vector-icons";
 import layout from "constants/layout";
 import { FlatList } from "react-native-gesture-handler";
-import ButtonsBar from "modules/DailySale/components/Buttonsbar";
+import ButtonsBar from "@navigation/Screens/Home/components/DailySale/components/Buttonsbar";
 import Ripple from "react-native-material-ripple";
 
 interface ProductsListProps {

@@ -9,7 +9,7 @@ import {
   useWindowDimensions,
 } from "react-native";
 import { Colors } from "../../constants/styles";
-import { Stars } from "../Stars/Stars";
+import { Stars } from "@components/Stars/Stars";
 import Color from "color";
 
 const { width } = Dimensions.get("screen");

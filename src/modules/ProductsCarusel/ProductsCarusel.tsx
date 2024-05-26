@@ -6,7 +6,7 @@ import caruselStyles from "./caruselStyles";
 import { notEmpty } from "../../functions/typecheckers";
 import EmptyList from "./Info";
 import useFetchProducts from "./useFetchProducts";
-import ProductSkeleton from "modules/ProductSkeleton";
+import ProductSkeleton from "@components/ProductSkeleton/index";
 import useColorTheme from "utils/context/ThemeContext";
 import {
   PRODUCT_CONTAINER_SIZE_X,

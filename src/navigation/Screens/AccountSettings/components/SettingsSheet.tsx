@@ -1,4 +1,7 @@
-import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
+import BottomSheet, {
+  BottomSheetBackdrop,
+  BottomSheetBackdropProps,
+} from "@gorhom/bottom-sheet";
 import { Input, Button } from "components";
 import { forwardRef, useCallback, Ref } from "react";
 import { Keyboard, View } from "react-native";
@@ -18,7 +21,7 @@ const SettingsSheet = forwardRef(
     const { onSave } = useSaveUserSettings(props.onSheetClose);
 
     const renderBackdrop = useCallback(
-      (props) => (
+      (props: BottomSheetBackdropProps) => (
         <BottomSheetBackdrop
           disappearsOnIndex={-1}
           appearsOnIndex={0.75}
@@ -36,11 +39,12 @@ const SettingsSheet = forwardRef(
         handleIndicatorStyle={{ backgroundColor: "white" }}
         style={{ paddingHorizontal: 20, paddingVertical: 10 }}
         enablePanDownToClose
-        snapPoints={["50%", "75%"]}
+        snapPoints={["50%"]}
         onClose={() => Keyboard.dismiss()}
         backdropComponent={renderBackdrop}
       >
         <Input
+          style={{ width: "100%" }}
           value={props.text}
           onChangeText={props.setText}
           placeholder={props.option.toLowerCase().replace("_", " ")}
@@ -52,10 +56,11 @@ const SettingsSheet = forwardRef(
         <View style={{ width: "100%", alignItems: "center" }}>
           <Button
             variant="primary"
-            type="outlined"
+            type="text"
             text={`Save ${props.option.toLowerCase().replace("_", " ")}`}
             fontStyle={{ color: Colors.secondary }}
             style={styles.button}
+            disabled={!props.text.trim()}
             onPress={() => onSave(props.option.toLowerCase(), props.text)}
           />
         </View>

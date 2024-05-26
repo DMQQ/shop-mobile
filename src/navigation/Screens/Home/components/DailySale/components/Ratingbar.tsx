@@ -3,7 +3,7 @@ import styles from "../styles";
 import { ThemedText } from "components";
 import { Fonts } from "constants/styles";
 import useColorTheme from "utils/context/ThemeContext";
-import { Stars } from "modules/Stars/Stars";
+import { Stars } from "@components/Stars/Stars";
 
 export default function RatingBar(props: {
   ratings: number;

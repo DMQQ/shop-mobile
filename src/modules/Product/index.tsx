@@ -101,7 +101,6 @@ function Product({
           <Image
             source={{
               uri: imageUrl,
-              cache: "force-cache",
             }}
             style={[styles.img]}
             resizeMode="contain"

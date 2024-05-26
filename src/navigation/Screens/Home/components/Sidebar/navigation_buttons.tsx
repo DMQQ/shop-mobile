@@ -2,7 +2,7 @@ import { View } from "react-native";
 import { Button } from "@components/index";
 import { AntDesign } from "@expo/vector-icons";
 import { useAppSelector } from "utils/hooks/hooks";
-import { RootStackParams, useNavigationProps } from "../../@types/types";
+import { RootStackParams, useNavigationProps } from "/@types/types";
 import { useNavigation } from "@react-navigation/core";
 import styles from "./Sidebar.styles";
 import { Fonts } from "constants/styles";

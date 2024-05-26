@@ -17,7 +17,7 @@ type SetCacheType = {
   };
 };
 
-const cacheSlice = createSlice({
+export const cacheSlice = createSlice({
   name: "cache",
   initialState,
   reducers: {

@@ -12,7 +12,7 @@ import { SharedElement } from "react-navigation-shared-element";
 import { ScreenNavigationProps } from "/@types/types";
 import { Button, Input, ValidatedInput } from "@components/index";
 import useListenKeyboard from "utils/hooks/useListenKeyboard";
-import StarsTouch from "@modules/Stars/Stars";
+import StarsTouch from "@components/Stars/Stars";
 import schema from "../schema";
 import { createStyles as styles } from "../Reviews.styles";
 import ResponseModal from "../components/ResponseModal";
@@ -24,7 +24,6 @@ export default function CreateReview({
 }: ScreenNavigationProps<"CreateReview">) {
   const { prod_id, thumbnail, sharedID, prod_name } = route.params;
   const [rating, setRating] = useState(0);
-  const { status, variants } = useListenKeyboard();
   const { response, upload, setResponse } = useUploadReview();
 
   return (

@@ -7,7 +7,7 @@ export interface Cart extends ProductMinified {
   cart_id: number;
   ammount: number;
 }
-const initialState = {
+export const initialState = {
   cart: [] as Cart[],
   loading: false,
   error: "",
@@ -25,7 +25,7 @@ type State = typeof initialState;
 const amount = (list: Cart[]): number =>
   list.reduce((prev, { ammount }) => prev + ammount, 0);
 
-const cartSlice = createSlice({
+export const cartSlice = createSlice({
   name: "cart",
   initialState,
 

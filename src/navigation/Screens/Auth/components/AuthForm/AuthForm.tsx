@@ -1,4 +1,4 @@
-import { Formik, FormikProps } from "formik";
+import { Formik } from "formik";
 import React, { useState } from "react";
 import { KeyboardAvoidingView, TouchableOpacity, Text } from "react-native";
 import styles from "./styles";

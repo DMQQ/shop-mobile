@@ -69,7 +69,7 @@ export const getSearchedProducts = createAsyncThunk<ThunkResponse, SearchState>(
   }
 );
 
-const initialState = {
+export const initialState = {
   response: {
     hasMore: false,
     results: [] as SuggestionType[],
@@ -164,8 +164,10 @@ export const searchSlice = createSlice({
           [...state.response.results, ...payload.results],
           "prod_id"
         );
+        state.isChanged = false;
       } else if (payload.results && !payload.isInfiniteScroll) {
         state.response.results = payload.results;
+        state.isChanged = true;
       }
 
       state.response.hasMore = payload.hasMore;

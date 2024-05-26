@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
-import { useNavigationProps } from "../../@types/types";
+import { useNavigationProps } from "/@types/types";
 import Header from "./components/Header";
 import Loader from "./components/Loader";
 import useDailySale from "./hooks/useDailySale";
@@ -15,7 +15,7 @@ import ImagesCarusel from "@components/ImagesCarusel/ImagesCarusel";
 
 import Taglist from "@components/Taglist/Taglist";
 
-import tags from "../../navigation/Screens/ProductDetails/components/tags";
+import tags from "@navigation/Screens/ProductDetails/components/tags";
 
 export default function DailySale() {
   const { data: sale, loading } = useDailySale();

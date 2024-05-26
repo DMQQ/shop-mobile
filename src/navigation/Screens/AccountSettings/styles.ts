@@ -8,8 +8,8 @@ export default StyleSheet.create({
     flexDirection: "row",
   },
   heading: {
-    fontSize: 35,
-    fontFamily: Fonts.PoppinsMedium,
+    fontSize: 30,
+    fontFamily: Fonts.PoppinsBold,
   },
   block: {
     width: "100%",

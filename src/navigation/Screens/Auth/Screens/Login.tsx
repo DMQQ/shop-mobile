@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from "react";
-import AuthForm from "@modules/AuthForm/AuthForm";
+import AuthForm from "../components/AuthForm/AuthForm";
 import useAuth from "utils/hooks/useAuth";
 import { ActivityIndicator } from "react-native";
 import { Container } from "@components/index";

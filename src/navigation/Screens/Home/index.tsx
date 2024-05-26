@@ -1,13 +1,13 @@
 import { ScrollView, View } from "react-native";
 import React from "react";
-import Sidebar from "@modules/Sidebar";
-import Header from "modules/Header";
+import Sidebar from "./components/Sidebar/index";
+import Header from "@components/Header";
 import Categories from "modules/Categories";
-import DailySale from "modules/DailySale";
+import DailySale from "./components/DailySale";
 import AuctionsNavigator from "modules/AuctionsNavigator";
 import Carusels from "./components/Carusels";
 import useAnimate from "./hooks/useAnimate";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import { GestureDetector } from "react-native-gesture-handler";
 import ReviewCards from "modules/ReviewCards";
 
 export default function Home() {

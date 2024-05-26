@@ -1,7 +1,7 @@
 import Color from "color";
 import layout from "constants/layout";
 import { Colors, Fonts } from "constants/styles";
-import { Stars } from "modules/Stars/Stars";
+import { Stars } from "@components/Stars/Stars";
 import { View, Text, Image } from "react-native";
 import Animated, {
   Extrapolate,

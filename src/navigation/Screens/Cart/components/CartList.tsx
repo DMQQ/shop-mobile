@@ -1,9 +1,18 @@
-import React, { useState, forwardRef } from "react";
-import { VirtualizedList, Image, View } from "react-native";
+import React, { useState, forwardRef, useCallback } from "react";
+import { VirtualizedList, Image, View, StyleSheet } from "react-native";
 import { CartProps } from "/@types/types";
-import Loader from "../components/Loader";
-import CartProduct from "../components/CartProduct";
+import Loader from "./Loader";
+import CartProduct from "./CartProduct";
 import layout from "constants/layout";
+
+const styles = StyleSheet.create({
+  footer: {
+    height: layout.screen.height - 225,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  footerImage: { width: layout.screen.width - 40, height: 350 },
+});
 
 interface CartListProps {
   data: CartProps[];
@@ -17,16 +26,10 @@ const getItem = (data: CartProps[], key: number) => {
 };
 
 const ListEmptyComponent = () => (
-  <View
-    style={{
-      height: layout.screen.height - 225,
-      alignItems: "center",
-      justifyContent: "center",
-    }}
-  >
+  <View style={styles.footer}>
     <Image
       source={require("@assets/Shopping_Cart.png")}
-      style={{ width: layout.screen.width - 40, height: 350 }}
+      style={styles.footerImage}
     />
   </View>
 );
@@ -44,10 +47,23 @@ const CartList = forwardRef<VirtualizedList<any>, CartListProps>(
           );
     }
 
+    const renderItem = useCallback(
+      ({ item, index }: { item: CartProps; index: number }) => (
+        <CartProduct
+          productIndex={index}
+          handleShowCheckbox={() => setShowCheckboxes((prev) => !prev)}
+          showCheckbox={showCheckboxes}
+          isProductSelected={selectedProducts.includes(item.prod_id)}
+          handleSelectProduct={(value) => handleToggleSelect(value, item)}
+          product={item}
+        />
+      ),
+      [selectedProducts]
+    );
+
     if (isLoading) {
       return <Loader />;
     }
-
     return (
       <VirtualizedList
         ref={ref}
@@ -61,16 +77,7 @@ const CartList = forwardRef<VirtualizedList<any>, CartListProps>(
         getItemCount={(data) => data.length}
         keyExtractor={({ prod_id }) => prod_id.toString()}
         data={data}
-        renderItem={({ item, index }) => (
-          <CartProduct
-            productIndex={index}
-            handleShowCheckbox={() => setShowCheckboxes((prev) => !prev)}
-            showCheckbox={showCheckboxes}
-            isProductSelected={selectedProducts.includes(item.prod_id)}
-            handleSelectProduct={(value) => handleToggleSelect(value, item)}
-            product={item}
-          />
-        )}
+        renderItem={renderItem}
       />
     );
   }

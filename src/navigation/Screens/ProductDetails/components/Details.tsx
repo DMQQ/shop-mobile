@@ -1,7 +1,7 @@
 import React from "react";
 import { Text } from "react-native";
 import styles from "./details.styles";
-import { Stars } from "modules/Stars/Stars";
+import { Stars } from "@components/Stars/Stars";
 import ReviewButtons from "./ReviewButtons";
 import type { DetailsProps, ProductRatingProps } from "/@types/types";
 import DetailRow from "./DetailRow";

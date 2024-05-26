@@ -3,7 +3,7 @@ import * as Font from "expo-font";
 import useCheckToken from "./useCheckToken";
 import { EvilIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useApolloClient } from "@apollo/client";
-import { GET_SALE } from "modules/DailySale/hooks/useDailySale";
+import { GET_SALE } from "@navigation/Screens/Home/components/DailySale/hooks/useDailySale";
 import { hideAsync } from "expo-splash-screen";
 
 export default function useLoadApp() {
@@ -28,10 +28,12 @@ export default function useLoadApp() {
         });
 
         if (usr?.token)
-          await apollo.query({
-            query: GET_SALE,
-            context: { headers: { token: usr.token } },
-          });
+          try {
+            await apollo.query({
+              query: GET_SALE,
+              context: { headers: { token: usr.token } },
+            });
+          } catch (error) {}
       } catch (error) {
         console.warn(error);
       } finally {

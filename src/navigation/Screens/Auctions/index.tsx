@@ -1,13 +1,11 @@
 import { Auction, ScreenNavigationProps } from "/@types/types";
 import { Container } from "components";
-import Header from "./Header";
-import useGetPendingAuctions from "./useGetAuctions";
+import Header from "./components/Header";
+import useGetPendingAuctions from "./hooks/useGetAuctions";
 import { VirtualizedList, LogBox } from "react-native";
-import Card from "./Card";
+import Card from "./components/Card";
 import { useCallback, useState } from "react";
 import RemoveProductsRepetition from "functions/RemoveRepetition";
-
-LogBox.ignoreAllLogs(true);
 
 export default function Auctions({
   navigation,
